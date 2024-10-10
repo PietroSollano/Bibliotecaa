@@ -1,138 +1,182 @@
 ﻿
-     class Livro {
-    [string]$Titulo
-    [string]$Autor
-    [string]$Genero
-    [int]$Quantidade
+     using System;
+using System.Collections.Generic;
 
-    Livro([string]$titulo, [string]$autor, [string]$genero, [int]$quantidade) {
-        $this.Titulo = $titulo
-        $this.Autor = $autor
-        $this.Genero = $genero
-        $this.Quantidade = $quantidade
+class Livro
+{
+    public string Titulo { get; set; }
+    public string Autor { get; set; }
+    public string Genero { get; set; }
+    public int Quantidade { get; set; }
+
+    public Livro(string titulo, string autor, string genero, int quantidade)
+    {
+        Titulo = titulo;
+        Autor = autor;
+        Genero = genero;
+        Quantidade = quantidade;
     }
 }
 
-# Catálogo inicial de livros
-$catalogo = @(
-    [Livro]::new("Bíblia Sagrada", "Vários autores", "Religioso", 10),
-    [Livro]::new("Harry Potter e a Pedra Filosofal", "J.K. Rowling", "Fantasia", 5),
-    [Livro]::new("Dom Quixote", "Miguel de Cervantes", "Clássico", 3),
-    [Livro]::new("Moby Dick", "Herman Melville", "Aventura", 2),
-    [Livro]::new("A Arte da Guerra", "Sun Tzu", "Estratégia", 4)
-)
+class Program
+{
+    static List<Livro> catalogo = new List<Livro>
+    {
+        new Livro("Bíblia Sagrada", "Vários autores", "Religioso", 10),
+        new Livro("Harry Potter e a Pedra Filosofal", "J.K. Rowling", "Fantasia", 5),
+        new Livro("Dom Quixote", "Miguel de Cervantes", "Clássico", 3),
+        new Livro("Moby Dick", "Herman Melville", "Aventura", 2),
+        new Livro("A Arte da Guerra", "Sun Tzu", "Estratégia", 4)
+    };
 
-$livrosEmprestados = @()
+    static List<string> livrosEmprestados = new List<string>();
 
-function ExibirCatalogo {
-    Write-Host "`nCatálogo de Livros:"
-    foreach ($livro in $catalogo) {
-        Write-Host "Título: $($livro.Titulo), Autor: $($livro.Autor), Gênero: $($livro.Genero), Quantidade disponível: $($livro.Quantidade)"
-    }
-}
+    static void Main()
+    {
+        Console.WriteLine("\nSeja Bem-vindo(a)!\n");
+        int opcao = 0;
 
-function EmprestarLivro {
-    if ($livrosEmprestados.Count -ge 3) {
-        Write-Host "Você já atingiu o limite de 3 livros emprestados."
-        return
-    }
+        while (opcao != 4)
+        {
+            Console.WriteLine("\nO que deseja?\n");
+            Console.WriteLine("1. Catálogo");
+            Console.WriteLine("2. Devolver Livros");
+            Console.WriteLine("3. Administrador (Cadastrar novo livro)");
+            Console.WriteLine("4. Sair");
 
-    Write-Host "`nEscolha um livro para emprestar (digite o número correspondente):"
-    for ($i = 0; $i -lt $catalogo.Count; $i++) {
-        Write-Host "$($i + 1). $($catalogo[$i].Titulo) (Disponíveis: $($catalogo[$i].Quantidade))"
-    }
+            string entrada = Console.ReadLine();
+            if (!int.TryParse(entrada, out opcao) || opcao < 1 || opcao > 4)
+            {
+                Console.WriteLine("Erro: Entrada inválida, por favor, digite um número entre 1 e 4.");
+                opcao = 0;
+            }
 
-    $escolha = Read-Host
-    if ([int]::TryParse($escolha, [ref]$escolha) -and $escolha -gt 0 -and $escolha -le $catalogo.Count) {
-        $livroEscolhido = $catalogo[$escolha - 1]
+            switch (opcao)
+            {
+                case 1:
+                    ExibirCatalogo();
+                    if (livrosEmprestados.Count >= 3)
+                    {
+                        Console.WriteLine("Você já atingiu o limite de 3 livros emprestados.");
+                    }
+                    else
+                    {
+                        EmprestarLivro();
+                    }
+                    break;
 
-        if ($livroEscolhido.Quantidade -gt 0) {
-            Write-Host "Você escolheu: $($livroEscolhido.Titulo)"
-            $livrosEmprestados += $livroEscolhido.Titulo
-            $livroEscolhido.Quantidade--
-            Write-Host "Livro '$($livroEscolhido.Titulo)' emprestado com sucesso!"
+                case 2:
+                    DevolverLivros();
+                    break;
+
+                case 3:
+                    CadastrarLivro();
+                    break;
+            }
         }
-        else {
-            Write-Host "Desculpe, este livro não está disponível no momento."
+
+        Console.WriteLine("Saindo...");
+    }
+
+    static void ExibirCatalogo()
+    {
+        Console.WriteLine("\nCatálogo de Livros:");
+        foreach (var livro in catalogo)
+        {
+            Console.WriteLine($"Título: {livro.Titulo}, Autor: {livro.Autor}, Gênero: {livro.Genero}, Quantidade disponível: {livro.Quantidade}");
         }
     }
-    else {
-        Write-Host "Opção inválida."
-    }
-}
 
-function DevolverLivros {
-    if ($livrosEmprestados.Count -gt 0) {
-        Write-Host "`nLivros emprestados:"
-        for ($i = 0; $i -lt $livrosEmprestados.Count; $i++) {
-            Write-Host "$($i + 1). $($livrosEmprestados[$i])"
+    static void EmprestarLivro()
+    {
+        Console.WriteLine("\nEscolha um livro para emprestar (digite o número correspondente):");
+        for (int i = 0; i < catalogo.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {catalogo[i].Titulo} (Disponíveis: {catalogo[i].Quantidade})");
         }
 
-        $devolucao = Read-Host "Qual livro deseja devolver? (digite o número correspondente)"
-        if ([int]::TryParse($devolucao, [ref]$devolucao) -and $devolucao -gt 0 -and $devolucao -le $livrosEmprestados.Count) {
-            $livroDevolvido = $livrosEmprestados[$devolucao - 1]
-            $livrosEmprestados.RemoveAt($devolucao - 1)
+        if (int.TryParse(Console.ReadLine(), out int escolha) && escolha > 0 && escolha <= catalogo.Count)
+        {
+            Livro livroEscolhido = catalogo[escolha - 1];
 
-            foreach ($livro in $catalogo) {
-                if ($livro.Titulo -eq $livroDevolvido) {
-                    $livro.Quantidade++
-                    break
+            if (livroEscolhido.Quantidade > 0)
+            {
+                Console.WriteLine($"Você escolheu: {livroEscolhido.Titulo}");
+                livrosEmprestados.Add(livroEscolhido.Titulo);
+                livroEscolhido.Quantidade--;
+                Console.WriteLine($"Livro '{livroEscolhido.Titulo}' emprestado com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Desculpe, este livro não está disponível no momento.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Opção inválida.");
+        }
+    }
+
+    static void DevolverLivros()
+    {
+        if (livrosEmprestados.Count > 0)
+        {
+            Console.WriteLine("\nLivros emprestados:");
+            for (int i = 0; i < livrosEmprestados.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {livrosEmprestados[i]}");
+            }
+
+            Console.WriteLine("Qual livro deseja devolver? (digite o número correspondente):");
+            if (int.TryParse(Console.ReadLine(), out int devolucao) && devolucao > 0 && devolucao <= livrosEmprestados.Count)
+            {
+                string livroDevolvido = livrosEmprestados[devolucao - 1];
+                livrosEmprestados.RemoveAt(devolucao - 1);
+
+                foreach (var livro in catalogo)
+                {
+                    if (livro.Titulo == livroDevolvido)
+                    {
+                        livro.Quantidade++;
+                        break;
+                    }
                 }
+
+                Console.WriteLine($"{livroDevolvido} devolvido com sucesso!");
             }
-
-            Write-Host "$livroDevolvido devolvido com sucesso!"
-        }
-        else {
-            Write-Host "Opção inválida."
-        }
-    }
-    else {
-        Write-Host "Você não tem livros para devolver."
-    }
-}
-
-function CadastrarLivro {
-    Write-Host "`nCadastrar novo livro"
-
-    $titulo = Read-Host "Título"
-    $autor = Read-Host "Autor"
-    $genero = Read-Host "Gênero"
-    $quantidade = Read-Host "Quantidade"
-    
-    if ([int]::TryParse($quantidade, [ref]$quantidade)) {
-        $catalogo += [Livro]::new($titulo, $autor, $genero, $quantidade)
-        Write-Host "Livro '$titulo' cadastrado com sucesso!"
-    }
-    else {
-        Write-Host "Quantidade inválida."
-    }
-}
-
-# Menu principal
-function Menu {
-    $opcao = 0
-    while ($opcao -ne 4) {
-        Write-Host "`nO que deseja?"
-        Write-Host "1. Catálogo"
-        Write-Host "2. Devolver Livros"
-        Write-Host "3. Administrador (Cadastrar novo livro)"
-        Write-Host "4. Sair"
-        $opcao = Read-Host
-
-        if ([int]::TryParse($opcao, [ref]$opcao) -and $opcao -ge 1 -and $opcao -le 4) {
-            switch ($opcao) {
-                1 { ExibirCatalogo; EmprestarLivro }
-                2 { DevolverLivros }
-                3 { CadastrarLivro }
+            else
+            {
+                Console.WriteLine("Opção inválida.");
             }
         }
-        else {
-            Write-Host "Erro: Entrada inválida, por favor, digite um número entre 1 e 4."
+        else
+        {
+            Console.WriteLine("Você não tem livros para devolver.");
         }
     }
 
-    Write-Host "Saindo..."
-}
+    static void CadastrarLivro()
+    {
+        Console.WriteLine("\nCadastrar novo livro");
 
-# Execução do menu
-Menu
+        Console.Write("Título: ");
+        string titulo = Console.ReadLine();
+
+        Console.Write("Autor: ");
+        string autor = Console.ReadLine();
+
+        Console.Write("Gênero: ");
+        string genero = Console.ReadLine();
+
+        Console.Write("Quantidade: ");
+        if (int.TryParse(Console.ReadLine(), out int quantidade))
+        {
+            catalogo.Add(new Livro(titulo, autor, genero, quantidade));
+            Console.WriteLine($"Livro '{titulo}' cadastrado com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Quantidade inválida.");
+        }
+    }
+}
