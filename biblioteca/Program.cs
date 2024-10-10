@@ -1,10 +1,10 @@
 ﻿
-    public string Titulo { get; set; }
-    public string Autor { get; set; }
-    public string Genero { get; set; }
-    public int Quantidade { get; set; }
+     string Titulo { get; set; }
+    string Autor { get; set; }
+     string Genero { get; set; }
+    int Quantidade { get; set; }
 
-    public Livro(string titulo, string autor, string genero, int quantidade)
+     Livro(string titulo, string autor, string genero, int quantidade)
     {
         Titulo = titulo;
         Autor = autor;
