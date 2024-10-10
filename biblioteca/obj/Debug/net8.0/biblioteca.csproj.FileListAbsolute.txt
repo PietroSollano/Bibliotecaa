@@ -1,0 +1,5 @@
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.AssemblyInfoInputs.cache
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.AssemblyInfo.cs
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.csproj.CoreCompileInputs.cache
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.sourcelink.json

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-class Livro
-
+﻿
     public string Titulo { get; set; }
     public string Autor { get; set; }
     public string Genero { get; set; }
