@@ -3,3 +3,13 @@ C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\bibliote
 C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.AssemblyInfo.cs
 C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.csproj.CoreCompileInputs.cache
 C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.sourcelink.json
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\bin\Debug\net8.0\biblioteca.exe
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\bin\Debug\net8.0\biblioteca.deps.json
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\bin\Debug\net8.0\biblioteca.runtimeconfig.json
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\bin\Debug\net8.0\biblioteca.dll
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\bin\Debug\net8.0\biblioteca.pdb
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.dll
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\refint\biblioteca.dll
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.pdb
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\biblioteca.genruntimeconfig.cache
+C:\Users\Alunos\Documents\Pietro Sollano\CursoTecnicoSenaii\Bibliotecaa\biblioteca\obj\Debug\net8.0\ref\biblioteca.dll
